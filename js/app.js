@@ -9,6 +9,21 @@ const LINE_THROUGH = "lineThrough";
 
 let LIST, id;
 
+let data = localStorage.getItem("TODO");
+if (data) {
+    LIST = JSON.parse(data);
+    id = LIST.length;
+    loadList(LIST);
+} else {
+    LIST = [];
+    id = 0;
+}
+
+function loadList(array) {
+    array.forEach(function (item) {
+        addToDo(item.name, item.id, item.done, item.trash);
+    });
+}
 
 clear.addEventListener("click", function () {
     localStorage.clear();
